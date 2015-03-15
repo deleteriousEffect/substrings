@@ -16,3 +16,14 @@ def substringify(string)
   end
   substrings.uniq
 end
+
+# Takes a string and a dictionary of possible substrings and returns
+# elements of the dictionary that are substrings of the string.
+def substring_matches(string, dictionary)
+  dictionary.to_s.scan(/\b(#{substringify(string).join('|')})\b/i).flatten
+end
+
+test_dictionary = %w(below down go going horn how howdy
+                     it i low own part partner sit)
+
+print substring_matches('below', test_dictionary)
