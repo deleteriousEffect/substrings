@@ -1,21 +1,28 @@
 # Takes a string an converts it into an array of its substrings
 def substringify(string)
+  # Removes all non word characters from the string
+  string.tr!(string.scan(/\W/).to_s, '')
+
   string_len = string.length
   substrings = []
-
   substring_first_index = 0
   substring_last_index = 0
 
   while substring_last_index < string_len
+    puts string[substring_first_index..substring_last_index]
     substrings << string[substring_first_index..substring_last_index]
     substring_last_index += 1
   end
   while substring_first_index < string_len
+    puts string[substring_first_index..substring_last_index]
     substrings << string[substring_first_index..substring_last_index]
     substring_first_index += 1
   end
   substrings.uniq
 end
+
+#puts substringify("Howdy partner, sit down! How's it going?").join('|'), "\n"
+puts substringify("Howdy partner").join('|'), "\n"
 
 # Takes a string and a dictionary of possible substrings and returns
 # elements of the dictionary that are substrings of the string.
@@ -28,4 +35,6 @@ end
 test_dictionary = %w(below down go going horn how howdy
                      it i low own part partner sit)
 
-print substring_matches('below', test_dictionary)
+#print substring_matches('below', test_dictionary)
+
+#print substring_matches("Howdy partner, sit down! How's it going?", test_dictionary)
