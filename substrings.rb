@@ -20,6 +20,8 @@ end
 # Takes a string and a dictionary of possible substrings and returns
 # elements of the dictionary that are substrings of the string.
 def substring_matches(string, dictionary)
+  # Joins the array of string's substrings with | so that the regular
+  # expression matches any instance of those substrings in the dictionary.
   dictionary.to_s.scan(/\b(#{substringify(string).join('|')})\b/i).flatten
 end
 
