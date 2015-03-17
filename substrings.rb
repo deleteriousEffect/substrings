@@ -8,21 +8,28 @@ def substringify(string)
   substring_first_index = 0
   substring_last_index = 0
 
-  while substring_last_index < string_len
-    puts string[substring_first_index..substring_last_index]
-    substrings << string[substring_first_index..substring_last_index]
-    substring_last_index += 1
+  (0..string_len).to_a.product((0..string_len).to_a).each do |a|
+    if a[0] < a[1] then substrings << string[a[0], a[1]]
+    end
+    substrings
   end
-  while substring_first_index < string_len
-    puts string[substring_first_index..substring_last_index]
-    substrings << string[substring_first_index..substring_last_index]
-    substring_first_index += 1
-  end
+
+  #string_len.times do
+    #puts string[substring_first_index..substring_last_index]
+    #substrings << string[substring_first_index..substring_last_index]
+    #substring_last_index += 1
+#
+    #string_len.times do
+      #puts string[substring_first_index..substring_last_index]
+      #substrings << string[substring_first_index..substring_last_index]
+      #substring_first_index += 1
+    #end
+  #end
   substrings.uniq
 end
 
 #puts substringify("Howdy partner, sit down! How's it going?").join('|'), "\n"
-puts substringify("Howdy partner").join('|'), "\n"
+#puts substringify("Howdy partner").join('|'), "\n"
 
 # Takes a string and a dictionary of possible substrings and returns
 # elements of the dictionary that are substrings of the string.
