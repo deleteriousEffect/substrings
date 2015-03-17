@@ -21,6 +21,9 @@ end
 # and how many times they are present in the dictionary.
 def substring_matches(string, dictionary)
   number_of_substring_matches = {}
+
+  # If a word from the dictionary appears as a substring of the string
+  # add it to the hash with its value being the number of times it appears.
   dictionary.each do |word|
     matches_len = string.scan(/#{word}/i).length
 
