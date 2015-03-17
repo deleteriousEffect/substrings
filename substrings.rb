@@ -16,20 +16,31 @@ def substringify(string)
   substrings
 end
 
-#puts substringify("Howdy partner, sit down! How's it going?").join('|'), "\n"
-#puts substringify("below").join('|'), "\n"
-
 # Takes a string and a dictionary of possible substrings and returns
-# elements of the dictionary that are substrings of the string.
+# elements of the dictionary that are substrings of the string
+# and how many times they are present in the dictionary.
 def substring_matches(string, dictionary)
-  # Joins the array of string's substrings with | so that the regular
-  # expression matches any instance of those substrings in the dictionary.
-  dictionary.to_s.scan(/\b(#{substringify(string).join('|')})\b/i).flatten
+  dictionary_string = dictionary.to_s
+  number_of_substring_matches = {}
+
+  # Checks each substring and adds it to the hash if it's a new match or
+  # increments the number of matches if the substring was previously found.
+  substringify(string).each do |substring|
+    matches_len = dictionary_string.scan(/\b#{substring}\b/i).length
+
+    if number_of_substring_matches.key?(substring)
+      number_of_substring_matches[substring] += matches_len
+    elsif matches_len != 0
+      number_of_substring_matches[substring] = matches_len
+    end
+  end
+
+  number_of_substring_matches
 end
 
 test_dictionary = %w(below down go going horn how howdy
                      it i low own part partner sit)
 
-#print substring_matches('below', test_dictionary)
+print substring_matches('below', test_dictionary)
 
 print substring_matches("Howdy partner, sit down! How's it going?", test_dictionary)
