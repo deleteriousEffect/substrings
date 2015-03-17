@@ -3,17 +3,21 @@ def substringify(string)
   # Removes all non word characters from the string
   string.tr!(string.scan(/\W/).to_s, '')
 
-  string_len = string.length
+  all_indexes_of_string = (0..string.length - 1).to_a
   substrings = []
 
-  (0..string_len).to_a.product((0..string_len).to_a).each do |a|
-    substrings << string[a[0], a[1]] if a[0] < a[1]
+  # All possible combinations of string's indexes
+  substring_indexs = all_indexes_of_string.product(all_indexes_of_string)
+
+  # Push all possible left to right substrings onto substrings array.
+  substring_indexs.each do |a|
+    substrings << string.slice(a[0]..a[1]) if a[0] <= a[1]
   end
   substrings
 end
 
 #puts substringify("Howdy partner, sit down! How's it going?").join('|'), "\n"
-#puts substringify("Howdy partner").join('|'), "\n"
+#puts substringify("below").join('|'), "\n"
 
 # Takes a string and a dictionary of possible substrings and returns
 # elements of the dictionary that are substrings of the string.
