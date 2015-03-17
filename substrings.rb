@@ -1,7 +1,7 @@
 # Takes a string an converts it into an array of its substrings
 def substringify(string)
   # Removes all non word characters from the string
-  string.tr!(string.scan(/\W/).to_s, '')
+  string.tr!(string.scan(/\W/).to_s, ' ')
 
   all_indexes_of_string = (0..string.length - 1).to_a
   substrings = []
@@ -20,21 +20,12 @@ end
 # elements of the dictionary that are substrings of the string
 # and how many times they are present in the dictionary.
 def substring_matches(string, dictionary)
-  dictionary_string = dictionary.to_s
   number_of_substring_matches = {}
+  dictionary.each do |word|
+    matches_len = string.scan(/#{word}/i).length
 
-  # Checks each substring and adds it to the hash if it's a new match or
-  # increments the number of matches if the substring was previously found.
-  substringify(string).each do |substring|
-    matches_len = dictionary_string.scan(/\b#{substring}\b/i).length
-
-    if number_of_substring_matches.key?(substring)
-      number_of_substring_matches[substring] += matches_len
-    elsif matches_len != 0
-      number_of_substring_matches[substring] = matches_len
-    end
+    number_of_substring_matches[word] = matches_len if matches_len != 0
   end
-
   number_of_substring_matches
 end
 
