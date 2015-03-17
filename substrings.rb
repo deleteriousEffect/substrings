@@ -5,27 +5,11 @@ def substringify(string)
 
   string_len = string.length
   substrings = []
-  substring_first_index = 0
-  substring_last_index = 0
 
   (0..string_len).to_a.product((0..string_len).to_a).each do |a|
-    if a[0] < a[1] then substrings << string[a[0], a[1]]
-    end
-    substrings
+    substrings << string[a[0], a[1]] if a[0] < a[1]
   end
-
-  #string_len.times do
-    #puts string[substring_first_index..substring_last_index]
-    #substrings << string[substring_first_index..substring_last_index]
-    #substring_last_index += 1
-#
-    #string_len.times do
-      #puts string[substring_first_index..substring_last_index]
-      #substrings << string[substring_first_index..substring_last_index]
-      #substring_first_index += 1
-    #end
-  #end
-  substrings.uniq
+  substrings
 end
 
 #puts substringify("Howdy partner, sit down! How's it going?").join('|'), "\n"
@@ -44,4 +28,4 @@ test_dictionary = %w(below down go going horn how howdy
 
 #print substring_matches('below', test_dictionary)
 
-#print substring_matches("Howdy partner, sit down! How's it going?", test_dictionary)
+print substring_matches("Howdy partner, sit down! How's it going?", test_dictionary)
